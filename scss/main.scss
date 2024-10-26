@@ -21,6 +21,11 @@ body {
     justify-content: center;
 }
 
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
 .tictactoe {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -32,11 +37,22 @@ body {
         background-color: #ffffff;
         border-radius: 1rem;
         box-shadow: 1rem 1.5rem 4rem rgba(0, 0, 0, 0.4);
-        font-size: 13rem;
+        font-size: 10rem;
+        padding-top: 1.6rem;
         cursor: pointer;
 
         display: flex;
         align-items: center;
         justify-content: center;
     }
+}
+
+.winner__text {
+    color: #fff;
+    font-size: 3rem;
+
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

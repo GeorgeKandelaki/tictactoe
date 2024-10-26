@@ -1,22 +1,14 @@
 "use strict";
-
-const tictactoe = document.querySelector(".tictactoe");
-
-let grid = [];
-
 const gridRows = 3;
 const gridColumns = 3;
 
 const player1 = 1;
 const player2 = 2;
 
-let curPlayer = player1;
+const tictactoe = document.querySelector(".tictactoe");
+let grid = [];
 
-let exampleGrid = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-];
+let curPlayer = player1;
 
 // Some Reusable helper functions
 function joinTemplate(arr, templateFn, join = true) {
@@ -93,24 +85,52 @@ function checkWinner(gridRows, gridColumns, gridWidth) {
     return winner;
 }
 
-function playTheMove(grid, gridColumns, square, player) {
-    const row = Math.floor(square / 3);
-    grid[row];
-    for (let i = 0; i < gridColumns; ++i) {}
+function playTheMove(grid, gridWidth, square, player) {
+    const posx = square % gridWidth;
+    const posy = Math.floor(square / gridWidth);
+    grid[posy][posx] = player;
+
+    return true;
 }
 
-function createGridDOM(grid) {
-    const flatGrid = grid.flat();
-
-    renderHTML(tictactoe, joinTemplate());
+function showWinner(player) {
+    renderHTML(
+        document.body,
+        `<h1 class="winner__text">Player ${player} has won the game! <a href="/">Play Again?</a>`,
+        "beforebegin"
+    );
+    return true;
 }
 
+function renderDraw() {
+    renderHTML(document.body, `<h1 class="winner__text"> It was a Draw! <a href="/">Play Again?</a>`, "beforebegin");
+    return true;
+}
+
+function fillOutSquare(square, player) {
+    if (player === player1) {
+        curPlayer = player2;
+        square.textContent = "X";
+    } else if (player === player2) {
+        curPlayer = player1;
+        square.textContent = "0";
+    }
+}
+
+grid = createGrid(gridRows, gridColumns);
+const playedSquares = [];
 tictactoe.addEventListener("click", (e) => {
     const { target } = e;
-    grid = createGrid(gridRows, gridColumns);
-
     if (!target.matches(".tictactoe__item")) return false;
 
-    const { square } = target.dataset;
-    playTheMove(grid, gridColumns, square, curPlayer);
+    const square = target;
+    if (playedSquares.includes(square)) return false;
+
+    playedSquares.push(square);
+    playTheMove(grid, gridColumns, square.dataset.square, curPlayer);
+    fillOutSquare(square, curPlayer);
+
+    const winner = checkWinner(grid, getColumns(grid, gridColumns), gridRows);
+    if (grid.flat().length === playedSquares.length) return renderDraw();
+    if (winner) return showWinner(winner);
 });
