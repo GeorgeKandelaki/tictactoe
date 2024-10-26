@@ -1,0 +1,14 @@
+{
+  "name": "tictactoe",
+  "version": "1.0.0",
+  "description": "Game of Tic Tac Toe",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "sass scss/main.scss css/style.css -w"
+  },
+  "author": "George Kandelaki",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.80.3"
+  }
+}

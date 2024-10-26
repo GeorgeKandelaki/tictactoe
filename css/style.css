@@ -1,0 +1,41 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-size: 1.6rem;
+  height: 100vh;
+  background-color: #4a4646;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tictactoe {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.tictactoe__item {
+  width: 10rem;
+  height: 10rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 1rem 1.5rem 4rem rgba(0, 0, 0, 0.4);
+  font-size: 13rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=style.css.map */
